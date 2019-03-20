@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/accessibility_service_description"
+    android:packageNames="com.example.android.apis"
+    android:accessibilityEventTypes="typeAllMask"
+    android:accessibilityFlags="flagDefault"
+    android:accessibilityFeedbackType="feedbackSpoken"
+    android:notificationTimeout="100"
+    android:canRetrieveWindowContent="true">
+
+</accessibility-service>
+
+<!--
+   description                - 辅助功能描述
+   packageNames               - 指定辅助功能监听的包名，不指定表示监听所有应用
+   accessibilityEventTypes    - 辅助功能事件类型，typeAllMask 表示所有事件
+   accessibilityFlags         - 辅助功能查找节点方式
+   accessibilityFeedbackType  - 相关操作之后，辅助功能给用户的反馈类型
+   canRetrieveWindowContent   - 是否允许辅助功能获得窗口的节点信息，为了能正常实用辅助功能，请务必保持该项配置为true
+-->
