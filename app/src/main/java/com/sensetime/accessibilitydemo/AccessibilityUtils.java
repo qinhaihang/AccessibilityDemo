@@ -27,7 +27,7 @@ public class AccessibilityUtils {
      * @param context：上下文
      * @return
      */
-    private boolean isAccessibilitySettingsOn(Context context,String accessibilityServiceName) {
+    public static boolean isAccessibilitySettingsOn(Context context,String accessibilityServiceName) {
         int accessibilityEnable = 0;
         String serviceName = context.getPackageName() + "/" +accessibilityServiceName;
         try {
@@ -59,7 +59,7 @@ public class AccessibilityUtils {
      * @param accessibilityServiceName：指定辅助服务名字
      * @param context：上下文
      */
-    private void openAccessibility(Activity context,String accessibilityServiceName){
+    public static void openAccessibility(Activity context,String accessibilityServiceName){
         if (!isAccessibilitySettingsOn(context,accessibilityServiceName)) {
             Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
             context.startActivity(intent);

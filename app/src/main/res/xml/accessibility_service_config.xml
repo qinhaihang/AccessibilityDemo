@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/accessibility_service_description"
-    android:packageNames="com.example.android.apis"
     android:accessibilityEventTypes="typeAllMask"
     android:accessibilityFlags="flagDefault"
     android:accessibilityFeedbackType="feedbackSpoken"
@@ -9,6 +8,11 @@
     android:canRetrieveWindowContent="true">
 
 </accessibility-service>
+
+    <!--监听的包名-->
+    <!--android:packageNames="com.example.android.apis" -->
+
+
 
 <!--
    description                - 辅助功能描述
