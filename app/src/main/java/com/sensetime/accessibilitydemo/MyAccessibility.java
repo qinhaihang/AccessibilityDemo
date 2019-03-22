@@ -30,59 +30,38 @@ public class MyAccessibility extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         Log.i("qhh","onAccessibilityEvent = "+event.toString());
 
-        CharSequence packageName = event.getPackageName();
-        if(packageName.equals("com.android.systemui")){
-            AccessibilityNodeInfo source = event.getSource();
-            if(source != null){
-                Log.i("qhh_source",source.toString());
-            }else {
-                Log.e("qhh_source","event.getSource() is null!!");
-            }
-
-        }else if(packageName.equals("com.huawei.android.launcher")){
-            AccessibilityNodeInfo source = event.getSource();
-            if(source != null){
-                Log.i("qhh_source","launcher = "+source.toString());
-                List<AccessibilityNodeInfo> nodeInfo = source.findAccessibilityNodeInfosByText("手机管家");
-                for (int i = 0; i < nodeInfo.size(); i++) {
-                    AccessibilityNodeInfo info = nodeInfo.get(i);
-                    if(info.getClassName().equals("android.widget.TextView") && info.isEnabled()){
-//                        info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                    }
-                }
-            }else {
-                Log.e("qhh_source","event.getSource() is null!!");
-            }
-        }
-
-        String className = event.getClassName().toString();
-        if(className.equals("com.android.systemui.recents.RecentsActivity")){
-
-        }
-
         //得到事件来源
-        AccessibilityNodeInfo source = event.getSource();
+//        AccessibilityNodeInfo source = event.getSource();
+        AccessibilityNodeInfo source = getRootInActiveWindow();
+
 
         if(source != null){
-            List<AccessibilityNodeInfo> nodes = source.findAccessibilityNodeInfosByText("确认");
-            if(nodes != null){
-                for (int i = 0; i < nodes.size(); i++) {
-                    AccessibilityNodeInfo nodeInfo = nodes.get(i);
-                    Log.d("qhh",nodeInfo.getClassName()+"");
-                    if(nodeInfo.getClassName().equals("android.widget.Button") && nodeInfo.isEnabled()){
+
+            List<AccessibilityNodeInfo> cb_auth = source.findAccessibilityNodeInfosByViewId("com.sensetime.sensemirror1:id/cb_auth");
+
+            if(cb_auth != null){
+                for (int i = 0; i < cb_auth.size(); i++) {
+                    AccessibilityNodeInfo nodeInfo = cb_auth.get(i);
+                    if(nodeInfo.getClassName().equals("android.widget.CheckBox") && nodeInfo.isEnabled()){
                         nodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
                 }
             }
-        }else{
-            Log.e("qhh","event.getSource() is null!!");
-        }
 
+//            int eventType = event.getEventType();
+//            if(eventType == AccessibilityEvent.TYPE_VIEW_CLICKED){
+//
+//            }
 
-        //得到当前窗口根节点所有信息
-        AccessibilityNodeInfo rootInActiveWindow = getRootInActiveWindow();
-
-        if(rootInActiveWindow != null){
+            List<AccessibilityNodeInfo> nodes = source.findAccessibilityNodeInfosByText("点击测颜值");
+            if (nodes != null) {
+                for (int i = 0; i < nodes.size(); i++) {
+                    AccessibilityNodeInfo nodeInfo = nodes.get(i);
+                    if (nodeInfo.getClassName().equals("android.widget.Button") && nodeInfo.isEnabled()) {
+                        nodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    }
+                }
+            }
 
         }else{
             Log.e("qhh","event.getSource() is null!!");
@@ -101,3 +80,45 @@ public class MyAccessibility extends AccessibilityService {
         return super.onUnbind(intent);
     }
 }
+
+/*
+    CharSequence packageName = event.getPackageName();
+        if(packageName.equals("com.android.systemui")){
+                AccessibilityNodeInfo source = event.getSource();
+                if(source != null){
+                Log.i("qhh_source",source.toString());
+                }else {
+                Log.e("qhh_source","event.getSource() is null!!");
+                }
+
+                }else if(packageName.equals("com.huawei.android.launcher")){
+                AccessibilityNodeInfo source = event.getSource();
+                if(source != null){
+                Log.i("qhh_source","launcher = "+source.toString());
+                List<AccessibilityNodeInfo> nodeInfo = source.findAccessibilityNodeInfosByText("手机管家");
+        for (int i = 0; i < nodeInfo.size(); i++) {
+        AccessibilityNodeInfo info = nodeInfo.get(i);
+        if(info.getClassName().equals("android.widget.TextView") && info.isEnabled()){
+        info.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+        }
+        }
+        }else {
+        Log.e("qhh_source","event.getSource() is null!!");
+        }
+        }
+
+        String className = event.getClassName().toString();
+        if(className.equals("com.android.systemui.recents.RecentsActivity")){
+
+        }
+
+
+        //得到当前窗口根节点所有信息
+        AccessibilityNodeInfo rootInActiveWindow = getRootInActiveWindow();
+
+        if(rootInActiveWindow != null){
+
+        }else{
+            Log.e("qhh","event.getSource() is null!!");
+        }
+*/
